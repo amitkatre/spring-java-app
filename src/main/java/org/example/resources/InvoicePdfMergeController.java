@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -61,10 +62,11 @@ public class InvoicePdfMergeController {
 	private static void uploadAttachment(String parentid) throws IOException, ConnectionException {
 		byte[] Body = Files.readAllBytes(new File("pdf/merge-pdf-result.pdf").toPath());
 		Attachment acc = new Attachment();
+		Date date = new Date();
 		acc.setBody(Body);
 		acc.setContentType("pdf");
 		acc.setParentId(parentid);
-		acc.setName("MergedInvandWoFSR.pdf"); 
+		acc.setName("parentid"+date.toString()+".pdf"); 
 		Attachment[] records = new Attachment[1];
 		records[0] = acc;
 		SaveResult[] saveResults = connection.create(records);
