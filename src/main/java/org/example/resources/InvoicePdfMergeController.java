@@ -1,12 +1,11 @@
 package org.example.resources;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -30,7 +29,6 @@ public class InvoicePdfMergeController {
 	private static final String PASSWORD = "@thumsup2zT5K0sEjOSUJtmXG23sp8LEeB";
 	private static final String endpoint = "https://test.salesforce.com/services/Soap/c/39.0/00D3C0000008iNt";
 	private static EnterpriseConnection connection;
-	private static InputStream is;
 	
 	public static void test() throws Exception{
 		String pId = "a7x3C000000L0Jr";
@@ -61,9 +59,7 @@ public class InvoicePdfMergeController {
 	}
 	
 	private static void uploadAttachment(String parentid) throws IOException, ConnectionException {
-		File f = new File("pdf/merge-pdf-result.pdf");
-		is = new FileInputStream(f);
-		byte[] Body = getBytesFromInputStream(is);
+		byte[] Body = Files.readAllBytes(new File("pdf/merge-pdf-result.pdf").toPath());
 		Attachment acc = new Attachment();
 		acc.setBody(Body);
 		acc.setContentType("pdf");
@@ -114,16 +110,6 @@ public class InvoicePdfMergeController {
 			e.printStackTrace();
 		}
 
-	}
-	
-	public static byte[] getBytesFromInputStream(InputStream is) throws IOException {
-		try (ByteArrayOutputStream os = new ByteArrayOutputStream();) {
-			byte[] buffer = new byte[0xFFFF];
-			for (int len; (len = is.read(buffer)) != -1;)
-				os.write(buffer, 0, len);
-			os.flush();
-			return os.toByteArray();
-		}
 	}
 	
 	public static void createDocument(List<InputStream> inputPdfList) throws DocumentException, IOException{
