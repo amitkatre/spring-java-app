@@ -53,7 +53,7 @@ public class BlobResource {
                 String[] value_split = file.split("\\|");
                 System.out.println("File "+file+" successfully downloaded in1");
                 String pId = value_split[0];
-        		String woId = value_split[1].split(".")[0];
+        		String woId = value_split[1].split("\\.")[0];
         		try {
 					InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
 					System.out.println("File "+file+" successfully downloaded in2");
