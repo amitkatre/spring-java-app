@@ -18,7 +18,7 @@ public class BlobResource {
     public String handleUpload(@FormDataParam("file") InputStream in,
                                @FormDataParam("file") FormDataContentDisposition fileDetail) throws Exception {
 
-        if(fileDetail==null || fileDetail.getFileName()==null) {
+        /*if(fileDetail==null || fileDetail.getFileName()==null) {
             return "No filename";
         }
         System.out.println("Receiving file "+fileDetail.getFileName());
@@ -34,7 +34,11 @@ public class BlobResource {
         }
         out.close();
         System.out.println("Received file "+f.getName()+" in "+(System.currentTimeMillis()-ts)/1000+"s");
-        return "File "+f.getName()+" received\n";
+        */
+    	String pId = "a7x3C000000L0Jr";
+		String woId = "a1r3C000000L1hz";
+		InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
+        return "Success";
         
     }
 
