@@ -58,6 +58,15 @@ public class BlobResource {
                     len = in.read(buf);
                 }
                 System.out.println("File "+file+" successfully downloaded in "+(System.currentTimeMillis()-ts)/1000+"s");
+                String pId = "a7x3C000000L0Jr";
+        		String woId = "a1r3C000000L1hz";
+        		try {
+					InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        		System.out.println("File");
             }
         };
     }
