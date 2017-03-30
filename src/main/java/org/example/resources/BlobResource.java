@@ -47,12 +47,13 @@ public class BlobResource {
     @Produces("application/octet-stream")
     public StreamingOutput handleDownload(@PathParam("file") final String file) throws Exception {
         return new StreamingOutput() {
-            public void write(OutputStream output) throws IOException {
+            @SuppressWarnings({ "unused", "resource" })
+			public void write(OutputStream output) throws IOException {
                 System.out.println("File "+file+" requested");
-                
+                String[] value_split = file.split("\\|");
                 System.out.println("File "+file+" successfully downloaded in1");
-                String pId = "a7x3C000000L0Jr";
-        		String woId = "a1r3C000000L1hz";
+                String pId = value_split[0];
+        		String woId = value_split[1].split(".")[0];
         		try {
 					InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
 					System.out.println("File "+file+" successfully downloaded in2");
