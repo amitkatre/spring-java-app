@@ -26,16 +26,11 @@ import com.sforce.ws.ConnectorConfig;
 
 public class InvoicePdfMergeController {
 
-	private static final String USERNAME = "vms-akatre@varian.com.sfdev";
-	private static final String PASSWORD = "@thumsup2zT5K0sEjOSUJtmXG23sp8LEeB";
-	private static final String endpoint = "https://test.salesforce.com/services/Soap/c/39.0/00D3C0000008iNt";
+	private static final String USERNAME = System.getenv("SF_USERNAME");
+	private static final String PASSWORD = System.getenv("SF_PASSWORD");
+	private static final String endpoint = System.getenv("SF_LOGIN_URL");
 	private static EnterpriseConnection connection;
 	
-	public static void test() throws Exception{
-		String pId = "a7x3C000000L0Jr";
-		String woId = "a1r3C000000L1hz";
-		mergeAttachmentControl(pId,woId);
-	}
 	
 	public static void mergeAttachmentControl(String pId, String woId) throws Exception {
 		
