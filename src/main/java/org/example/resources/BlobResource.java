@@ -48,16 +48,16 @@ public class BlobResource {
     public StreamingOutput handleDownload(@PathParam("file") final String file) throws Exception {
         return new StreamingOutput() {
             public void write(OutputStream output) throws IOException {
-                System.out.println("File "+file+" requested");
+                /*System.out.println("File "+file+" requested");
                 long ts = System.currentTimeMillis();
                 byte[] buf = new byte[16384];
-                FileInputStream in = new FileInputStream(new File(file));
+                FileInputStream in = new FileInputStream(new File("Pdf/"+file));
                 int len = in.read(buf); 
                 while(len!=-1) {
                     output.write(buf,0,len);
                     len = in.read(buf);
-                }
-                System.out.println("File "+file+" successfully downloaded in "+(System.currentTimeMillis()-ts)/1000+"s");
+                }*/
+                System.out.println("File "+file+" successfully downloaded in");
                 String pId = "a7x3C000000L0Jr";
         		String woId = "a1r3C000000L1hz";
         		try {
