@@ -66,7 +66,7 @@ public class InvoicePdfMergeController {
 		acc.setBody(Body);
 		acc.setContentType("pdf");
 		acc.setParentId(parentid);
-		acc.setName("parentid"+date.toString()+".pdf"); 
+		acc.setName(parentid+"-"+date.toString()+".pdf"); 
 		Attachment[] records = new Attachment[1];
 		records[0] = acc;
 		SaveResult[] saveResults = connection.create(records);
