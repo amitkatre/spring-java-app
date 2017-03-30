@@ -101,7 +101,7 @@ public class InvoicePdfMergeController {
 			}
 
 			createDocument(inputPdfList);
-			uploadAttachment(pId);
+			//uploadAttachment(pId);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
