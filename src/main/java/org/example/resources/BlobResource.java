@@ -11,7 +11,7 @@ import com.sun.jersey.multipart.FormDataParam;
 
 @Path("/blob")
 public class BlobResource {
-
+	
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces("text/plain")
@@ -48,21 +48,22 @@ public class BlobResource {
     public StreamingOutput handleDownload(@PathParam("file") final String file) throws Exception {
         return new StreamingOutput() {
             public void write(OutputStream output) throws IOException {
-                /*System.out.println("File "+file+" requested");
-                long ts = System.currentTimeMillis();
-                byte[] buf = new byte[16384];
-                FileInputStream in = new FileInputStream(new File("Pdf/"+file));
-                int len = in.read(buf); 
-                while(len!=-1) {
-                    output.write(buf,0,len);
-                    len = in.read(buf);
-                }*/
+                System.out.println("File "+file+" requested");
+                
                 System.out.println("File "+file+" successfully downloaded in1");
                 String pId = "a7x3C000000L0Jr";
         		String woId = "a1r3C000000L1hz";
         		try {
 					InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
 					System.out.println("File "+file+" successfully downloaded in2");
+					long ts = System.currentTimeMillis();
+	                byte[] buf = new byte[16384];
+	                FileInputStream in = new FileInputStream(new File("pdf/merge-pdf-result.pdf"));
+	                int len = in.read(buf); 
+	                while(len!=-1) {
+	                    output.write(buf,0,len);
+	                    len = in.read(buf);
+	                }
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
