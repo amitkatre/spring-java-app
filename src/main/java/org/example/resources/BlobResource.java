@@ -44,35 +44,29 @@ public class BlobResource {
 
     @GET
     @Path("/{file}")
-    @Produces("application/octet-stream")
-    public StreamingOutput handleDownload(@PathParam("file") final String file) throws Exception {
-        return new StreamingOutput() {
-            @SuppressWarnings({ "unused", "resource" })
-			public void write(OutputStream output) throws IOException {
-                System.out.println("File "+file+" requested");
-                String[] value_split = file.split("\\|");
-                System.out.println("File "+file+" successfully downloaded in1");
-                String pId = value_split[0];
-        		String woId = value_split[1].split("\\.")[0];
-        		try {
-					InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
-					System.out.println("File "+file+" successfully downloaded in2");
-					long ts = System.currentTimeMillis();
-	                byte[] buf = new byte[16384];
-	                FileInputStream in = new FileInputStream(new File("pdf/merge-pdf-result.pdf"));
-	                int len = in.read(buf); 
-	                while(len!=-1) {
-	                    output.write(buf,0,len);
-	                    len = in.read(buf);
-	                }
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("File "+e.getMessage());
-				}
-        		System.out.println("File");
-            }
-        };
+    @Produces("application/pdf")
+    public File handleDownload(@PathParam("file") final String file) throws Exception {
+        
+    	System.out.println("File "+file+" requested");
+        String[] value_split = file.split("\\|");
+        System.out.println("File "+file+" successfully downloaded in1");
+        String pId = value_split[0];
+		String woId = value_split[1].split("\\.")[0];
+		try {
+			InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
+			System.out.println("File "+file+" successfully downloaded in2");
+			long ts = System.currentTimeMillis();
+            byte[] buf = new byte[16384];
+            File outputfile = new File("pdf/merge-pdf-result.pdf");
+            return outputfile;
+           
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("File "+e.getMessage());
+		}
+		System.out.println("File");
+    	return null;
     }
     
 }
