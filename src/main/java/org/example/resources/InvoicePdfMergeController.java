@@ -97,7 +97,7 @@ public class InvoicePdfMergeController {
 			QueryResult queryResultsAttachment;
 
 			queryResultsAttachment = connection
-					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + pId + "' order by CreateDate desc");
+					.query("SELECT Body " + "FROM Attachment " + "where Id ='" + pId + "'");
 			if (queryResultsAttachment.getSize() > 0) {
 				Attachment aObj = (Attachment) queryResultsAttachment.getRecords()[0];
 				System.out.println(aObj.getBody());
@@ -106,7 +106,7 @@ public class InvoicePdfMergeController {
 			}
 			
 			queryResultsAttachment = connection
-					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + woId + "' order by CreateDate desc");
+					.query("SELECT Body " + "FROM Attachment " + "where Id ='" + woId + "'");
 			if (queryResultsAttachment.getSize() > 0) {
 				Attachment aObj = (Attachment) queryResultsAttachment.getRecords()[0];
 				System.out.println(aObj.getBody());
