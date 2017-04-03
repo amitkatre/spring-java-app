@@ -42,7 +42,7 @@ public class BlobResource {
         return "Success";
         
     }
-
+    /*
     @GET
     @Path("/{file}")
     @Produces("application/pdf")
@@ -54,6 +54,28 @@ public class BlobResource {
 		String woId = value_split[1].split("\\.")[0];
 		try {
 			InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
+			System.out.println("File "+file+" successfully downloaded in2");
+            File outputfile = new File("pdf/merge-pdf-result.pdf");
+            return outputfile;
+           
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("File "+e.getMessage());
+		}
+		System.out.println("File");
+    	return null;
+    }
+    
+    */
+    
+    @GET
+    @Path("/{file}")
+    @Produces("application/pdf")
+    public File handleDownload(@PathParam("file") final String file) throws Exception {    	
+    	System.out.println("File "+file+" requested");
+		try {
+			InvoicePdfMergeController.mergeAttachmentControl(file);
 			System.out.println("File "+file+" successfully downloaded in2");
             File outputfile = new File("pdf/merge-pdf-result.pdf");
             return outputfile;
