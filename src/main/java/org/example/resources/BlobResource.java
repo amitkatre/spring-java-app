@@ -2,6 +2,7 @@ package org.example.resources;
 
 import java.io.*;
 
+import javax.print.PrintService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.StreamingOutput;
@@ -45,8 +46,7 @@ public class BlobResource {
     @GET
     @Path("/{file}")
     @Produces("application/pdf")
-    public File handleDownload(@PathParam("file") final String file) throws Exception {
-        
+    public File handleDownload(@PathParam("file") final String file) throws Exception {    	
     	System.out.println("File "+file+" requested");
         String[] value_split = file.split("\\|");
         System.out.println("File "+file+" successfully downloaded in1");
@@ -55,8 +55,6 @@ public class BlobResource {
 		try {
 			InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
 			System.out.println("File "+file+" successfully downloaded in2");
-			long ts = System.currentTimeMillis();
-            byte[] buf = new byte[16384];
             File outputfile = new File("pdf/merge-pdf-result.pdf");
             return outputfile;
            

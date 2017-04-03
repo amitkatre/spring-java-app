@@ -21,6 +21,7 @@ import com.sforce.soap.enterprise.Error;
 import com.sforce.soap.enterprise.QueryResult;
 import com.sforce.soap.enterprise.SaveResult;
 import com.sforce.soap.enterprise.sobject.Attachment;
+import com.sforce.soap.enterprise.sobject.Invoice__c;
 import com.sforce.ws.ConnectionException;
 import com.sforce.ws.ConnectorConfig;
 
@@ -76,6 +77,19 @@ public class InvoicePdfMergeController {
 			}
 		}
 	}
+	/*
+	private static void mergeAttchments(String [] inviceIds) {
+		
+		List<InputStream> inputPdfList = new ArrayList<InputStream>();
+		QueryResult queryInv = ;
+		
+		
+		
+		String [] woIds;
+		
+		
+		
+	}*/
 	
 	private static void mergeAttchments(String pId, String woId) {
 		try {
@@ -83,7 +97,7 @@ public class InvoicePdfMergeController {
 			QueryResult queryResultsAttachment;
 
 			queryResultsAttachment = connection
-					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + pId + "'");
+					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + pId + "' order by CreateDate desc");
 			if (queryResultsAttachment.getSize() > 0) {
 				Attachment aObj = (Attachment) queryResultsAttachment.getRecords()[0];
 				System.out.println(aObj.getBody());
@@ -92,7 +106,7 @@ public class InvoicePdfMergeController {
 			}
 			
 			queryResultsAttachment = connection
-					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + woId + "'");
+					.query("SELECT Body " + "FROM Attachment " + "where ParentId ='" + woId + "' order by CreateDate desc");
 			if (queryResultsAttachment.getSize() > 0) {
 				Attachment aObj = (Attachment) queryResultsAttachment.getRecords()[0];
 				System.out.println(aObj.getBody());
