@@ -24,7 +24,7 @@ public class PdfMergeResource {
     @GET
     @Path("/{file}")
     @Produces("application/pdf")
-    public File handleMerge(@PathParam("file") final String file) throws Exception {    	
+    public Object handleMerge(@PathParam("file") final String file) throws Exception {    	
     	System.out.println("File "+file+" requested");
 		try {
 			
@@ -39,7 +39,7 @@ public class PdfMergeResource {
 			System.out.println("File "+e.getMessage());
 		}
 		System.out.println("File");
-    	return null;
+    	return "Error";
     }
     
     @GET
