@@ -1,5 +1,6 @@
-package org.example.resources;
+package com.varian.pdf.resources;
 
+/*
 import java.io.*;
 
 import javax.print.PrintService;
@@ -10,9 +11,10 @@ import javax.ws.rs.core.StreamingOutput;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 
-@Path("/blob")
-public class BlobResource {
-	
+*/
+/*@Path("/blob") */
+public class BlobResourceOldBackup {
+	/*
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces("text/plain")
@@ -35,7 +37,7 @@ public class BlobResource {
         }
         out.close();
         System.out.println("Received file "+f.getName()+" in "+(System.currentTimeMillis()-ts)/1000+"s");
-        */
+        
     	String pId = "a7x3C000000L0Jr";
 		String woId = "a1r3C000000L1hz";
 		InvoicePdfMergeController.mergeAttachmentControl(pId,woId);
@@ -67,7 +69,7 @@ public class BlobResource {
     	return null;
     }
     
-    */
+    
     
     @GET
     @Path("/{file}")
@@ -79,7 +81,7 @@ public class BlobResource {
 			System.out.println("File "+file+" successfully downloaded in2");
             File outputfile = new File("pdf/merge-pdf-result.pdf");
             return outputfile;
-           
+            
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,5 +90,7 @@ public class BlobResource {
 		System.out.println("File");
     	return null;
     }
+    
+    */
     
 }

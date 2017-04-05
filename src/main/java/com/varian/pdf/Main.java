@@ -1,20 +1,19 @@
-package org.example;
+package com.varian.pdf;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.example.resources.InvoicePdfMergeController;
-
 import com.sun.grizzly.http.SelectorThread;
 import com.sun.jersey.api.container.grizzly.GrizzlyWebContainerFactory;
+import com.varian.pdf.resources.InvoicePdfMergeController;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         
         final String baseUri = "http://localhost:"+(System.getenv("PORT")!=null?System.getenv("PORT"):"9998")+"/";
         final Map<String, String> initParams = new HashMap<String, String>();
-        initParams.put("com.sun.jersey.config.property.packages","org.example.resources");
+        initParams.put("com.sun.jersey.config.property.packages","com.varian.pdf.resources");
 
         System.out.println("Starting grizzly...");
         SelectorThread threadSelector = GrizzlyWebContainerFactory.create(baseUri, initParams);

@@ -1,5 +1,6 @@
-package org.example.resources;
+package com.varian.pdf.resources;
 
+/* Not in use */
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,6 +54,33 @@ public class InvoicePdfMergeController {
 		}
 
 	}
+	
+	/*
+	 *  Authenticate using user name and password
+	 */
+	public boolean isAutheticated(){
+		ConnectorConfig config = new ConnectorConfig();
+		config.setUsername(USERNAME);
+		config.setPassword(PASSWORD);
+		config.setAuthEndpoint(endpoint);
+		try {
+			connection = Connector.newConnection(config);
+			// display some current settings
+			System.out.println("Auth EndPoint: " + config.getAuthEndpoint());
+			System.out.println("Service EndPoint: " + config.getServiceEndpoint());
+			System.out.println("Username: " + config.getUsername());
+			System.out.println("SessionId: " + config.getSessionId());
+			if(config.getSessionId() != null){
+				return true;
+			}else{
+				return false;
+			}
+			
+		} catch (ConnectionException e1) {
+			e1.printStackTrace();
+			return false;
+		}
+	}
 
 	public static void mergeAttachmentControl(String pram) throws Exception {
 
@@ -99,22 +127,8 @@ public class InvoicePdfMergeController {
 			}
 		}
 	}
-	/*
-	 * private static void mergeAttchments(String [] inviceIds) {
-	 * 
-	 * List<InputStream> inputPdfList = new ArrayList<InputStream>();
-	 * QueryResult queryInv = ;
-	 * 
-	 * 
-	 * 
-	 * String [] woIds;
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
 
-	private static void mergeAttchments(String pId, String woId) {
+	public static void mergeAttchments(String pId, String woId) {
 		try {
 			List<InputStream> inputPdfList = new ArrayList<InputStream>();
 			QueryResult queryResultsAttachment;
@@ -134,9 +148,7 @@ public class InvoicePdfMergeController {
 				InputStream myInputStream = new ByteArrayInputStream(aObj.getBody());
 				inputPdfList.add(myInputStream);
 			}
-
 			createDocument(inputPdfList);
-			// uploadAttachment(pId);
 
 		} catch (Exception e) {
 			e.printStackTrace();

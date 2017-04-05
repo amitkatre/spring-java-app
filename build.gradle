@@ -3,7 +3,7 @@ apply plugin:'application'
 
 defaultTasks 'install'
 
-mainClassName = "org.example.Main"
+mainClassName = "com.varian.pdf.Main"
 applicationName = "app"
 
 repositories {
