@@ -41,6 +41,9 @@ public class SalesforcePdfMergeController {
 		config.setUsername(USERNAME);
 		config.setPassword(PASSWORD);
 		config.setAuthEndpoint(endpoint);
+		System.out.println("USERNAME: " + USERNAME);
+		System.out.println("PASSWORD: " + PASSWORD);
+		System.out.println("endpoint: " + endpoint);
 		try {
 			connection = Connector.newConnection(config);
 			// display some current settings
