@@ -43,7 +43,7 @@ public class PdfMergeResource {
     }
     
     @GET
-    @Path("/")
+    @Path("/test")
     @Produces("application/pdf")
     public String getOnly(@PathParam("file") final String file) throws Exception {    	
     	return "success";
